@@ -10,12 +10,14 @@
 <body>
     <form action="" method="POST" novalidate>
         {% csrf_token %}      
-        <div class="form-control {% if form.username.errors %} errors {% endif %}">
-        {{ form.username.label_tag }}
-        {{ form.username }}
-        <button type="submit">Send</button>
-        {{ form.username.errors }}
+        {% for field in form  %}
+        <div class="form-control {% if field.errors %} errors {% endif %}">
+        {{ field.label_tag }}
+        {{ field }}
         </div>
+        {% endfor %}
+        <button type="submit">Send</button>
+        {{ field.errors }}
     </form>
 </body>
 </html>
