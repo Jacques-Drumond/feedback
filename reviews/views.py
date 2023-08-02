@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from .forms import ReviewForm
-from .models import Review
 def index(request):
     # se a requisição for POST. 
     if request.method == "POST":
@@ -11,16 +10,11 @@ def index(request):
         # verifica se o formulário é valido (parâmetros configurados no forms).
         if form.is_valid():
             print(form.cleaned_data)
-
+            form.save()
             # instancia na variável os dados coletados do formulário, as keys vem do 
             # models user_name, review etc.
-            review = Review(
-                user_name=form.cleaned_data['username'],
-                reiview_text=form.cleaned_data['review_text'],
-                rating=form.cleaned_data['rating']
-            )
+
             # utiliza o método de modelo save() para salvar no database
-            review.save()
             # redireciona para a pagina /thank-you fazendo com que a função thank_you rode.
             return HttpResponseRedirect('/thank-you')
         

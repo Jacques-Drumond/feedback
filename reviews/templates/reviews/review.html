@@ -15,9 +15,9 @@
         {{ field.label_tag }}
         {{ field }}
         </div>
+        {{ field.errors }}
         {% endfor %}
         <button type="submit">Send</button>
-        {{ field.errors }}
     </form>
 </body>
 </html>
