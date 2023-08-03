@@ -50,3 +50,17 @@ class reviewsListView(TemplateView):
         context['reviews'] = Review.objects.all()
 
         return context
+
+class reviewDetail(TemplateView):
+    template_name = 'reviews/review_details.html'
+
+    def  get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        review_id = kwargs['id']
+        print(review_id)
+        review = Review.objects.get(pk=review_id)
+        print(review.user_name)
+        context['review'] = review
+
+        return context
+

@@ -3,11 +3,10 @@
 {% block title %}
 All reviews
 {% endblock title %}
-
 {% block content %}
 <ul>
     {% for review in reviews  %}
-    <li><a>Auhor: {{review.user_name}} (Rating: {{review.rating}})</a></li>
+    <li><a href="/reviews/{{review.id}}">Auhor: {{review.user_name}} (Rating: {{review.rating}})</a></li>
     {% endfor %}
 </ul>
 {% endblock content %}
