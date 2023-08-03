@@ -73,3 +73,7 @@ input {
 .errors label {
     color: #680000;
 }
+
+li {
+    list-style: none
+}   
