@@ -4,8 +4,11 @@
 All reviews
 {% endblock title %}
 {% block content %}
-<ul>
+<ul>    
+    <!-- Faz um loop no dicionário reviews que vem da classe reviewsListView, esta faz uma consulta nos models e puxa todos -->
     {% for review in reviews  %}
+    <!--Loop que mostra todos os itens do models em um list item, e estes como links, onde o href envia para a pagina reviews/review_id -->
+    <!-- Assim enviando o ID na URL -->
     <li><a href="/reviews/{{review.id}}">Auhor: {{review.user_name}} (Rating: {{review.rating}})</a></li>
     {% endfor %}
 </ul>
