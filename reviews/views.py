@@ -57,9 +57,7 @@ class reviewDetail(TemplateView):
     def  get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         review_id = kwargs['id']
-        print(review_id)
         review = Review.objects.get(pk=review_id)
-        print(review.user_name)
         context['review'] = review
 
         return context
