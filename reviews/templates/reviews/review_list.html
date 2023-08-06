@@ -9,7 +9,7 @@ All reviews
     {% for review in reviews  %}
     <!--Loop que mostra todos os itens do models em um list item, e estes como links, onde o href envia para a pagina reviews/review_id -->
     <!-- Assim enviando o ID na URL -->
-    <li><a href="/reviews/{{review.id}}">Auhor: {{review.user_name}} (Rating: {{review.rating}})</a></li>
+    <li><a href="/reviews/{{review.id}}">Author: {{review.user_name}} (Rating: {{review.rating}})</a></li>
     {% endfor %}
 </ul>
 {% endblock content %}
