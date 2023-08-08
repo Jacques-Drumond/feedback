@@ -2,21 +2,28 @@ from django.shortcuts import render
 from django.views import View
 from django.http import HttpResponseRedirect
 import os
-from .functions import get_folder_size
+from .functions import get_folder_size, store_file
+from .forms import profileForm
+from .models import UserProfile
 # Create your views here.
 
-def store_file(folder, file):
-    with open(f"{folder}{file.name}.jpg", "wb+") as dest:
-        for chunk in file.chunks():
-            dest.write(chunk)
-
 class CreateProfileView(View):
-    def get(self, request):
-        return render(request, "profiles/create_profile.html")
 
+    def get(self, request):
+        form = profileForm()
+        return render(request, "profiles/create_profile.html", {
+            "form": form
+        })
+    
     def post(self, request):
-        if get_folder_size("temp") < 4501795:
-            store_file("temp/", request.FILES['image'])
+
+        submitted_form = profileForm(request.POST, request.FILES)
+
+        if submitted_form.is_valid():
+            profile = UserProfile(image=request.FILES['user_image'])
+            profile.save()
+            return HttpResponseRedirect("/profiles")
         else:
-            store_file("temp2/", request.FILES['image'])
-        return HttpResponseRedirect("/profiles")
+            return render(request, "profiles/create_profile.html", {
+                "form": submitted_form
+            })
