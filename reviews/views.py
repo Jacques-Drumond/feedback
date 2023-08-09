@@ -68,6 +68,7 @@ class insertLinkView(View):
         })
     def post(self, request):
         link = request.POST['link']
-
+        response = requests.get(link)
+        print(response)
         print(link)
         return HttpResponseRedirect('image-downloader')
