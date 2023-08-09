@@ -9,8 +9,9 @@ from .models import Review
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView
 import requests
+from bs4 import BeautifulSoup
+from urllib.request import urlopen
 
-# retorna o form
 class ReviewView(CreateView):
     model = Review
     form_class = ReviewForm
@@ -68,7 +69,7 @@ class insertLinkView(View):
         })
     def post(self, request):
         link = request.POST['link']
-        response = requests.get(link)
-        print(response)
-        print(link)
+        soup = BeautifulSoup(urlopen(link).read(), features="html.parser")
+        link = soup.find(itemprop="image")
+        print(link)  
         return HttpResponseRedirect('image-downloader')
