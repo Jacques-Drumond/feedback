@@ -23,3 +23,7 @@ class ReviewForm(forms.ModelForm):
                 "required": "Give your rating"
             },
         }
+
+
+class linkForm(forms.Form):
+    link = forms.CharField()

@@ -2,12 +2,13 @@ from typing import Any, Dict
 from django.db.models.query import QuerySet
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
-from .forms import ReviewForm
+from .forms import ReviewForm, linkForm
 from django.views import View
 from django.views.generic.base import TemplateView
 from .models import Review
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView
+import requests
 
 # retorna o form
 class ReviewView(CreateView):
@@ -57,3 +58,16 @@ class AddFavoriteView(View):
         review_id = request.POST["review_id"]
         request.session["favorite_review"] = review_id
         return HttpResponseRedirect("/reviews/" + review_id)
+    
+
+class insertLinkView(View):
+    def get(self, request):
+        form_class = linkForm
+        return render(request, 'reviews/image_downloader.html', {
+            "form": form_class
+        })
+    def post(self, request):
+        link = request.POST['link']
+
+        print(link)
+        return HttpResponseRedirect('image-downloader')
